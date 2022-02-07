@@ -1,5 +1,6 @@
 package es.gom.ApiFC.services;
 
+import es.gom.ApiFC.dto.UsuarioDto;
 import es.gom.ApiFC.entities.Candidato;
 import es.gom.ApiFC.entities.Usuario;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public interface UsuarioService {
 
     Optional<Usuario> findByCandidatoId(Long id);
 
-    Usuario save(Usuario usuario);
+    Usuario save(UsuarioDto usuario);
 
     boolean deleteById(Long id);
 

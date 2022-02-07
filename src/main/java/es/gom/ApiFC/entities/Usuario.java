@@ -57,7 +57,6 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    //@Override
     public String getPassword() {
         return password;
     }
@@ -74,7 +73,6 @@ public class Usuario implements Serializable {
         this.candidatos = candidatos;
     }
 
-    //@Override
     public String getUsername() {
         return username;
     }
@@ -83,36 +81,6 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-   /* @JsonIgnore
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-*/
-   /* @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-*/
     @Override
     public String toString() {
         return "Usuario{" +

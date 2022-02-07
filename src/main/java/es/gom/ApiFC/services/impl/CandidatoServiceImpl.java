@@ -42,7 +42,7 @@ public class CandidatoServiceImpl implements CandidatoService {
 
     @Override
     public List<Candidato> findAllByEtiquetaId(Long id) {
-        return null;
+        return candidatoRepository.findAllByEtiquetasId(id);
     }
 
     @Override

@@ -1,43 +1,57 @@
 package es.gom.ApiFC.config;
-import es.gom.ApiFC.services.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MyUserDetailService userDetailsService;
+    private UserDetailsService userDetailsService;
 
+    @Bean
+    public static BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
+    @Bean
+    public JwtAuthenticationFilter authenticationTokenFilterBean() throws Exception {
+        return new JwtAuthenticationFilter();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-                .anyRequest().authenticated()
-                /*.and().formLogin()
-                .loginPage("/login").permitAll()*/
-                .and()
-                .httpBasic();
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/usuarios/registro", "/api/usuarios/login").permitAll()
+                .anyRequest().authenticated();
+                //.and().formLogin()
+                //.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-               /* .withUser("user").password(passwordEncoder.encode("1234"))
-                .roles("USER", "ADMIN");*/
-        /*auth.inMemoryAuthentication().withUser("user").password("1234")
-                .roles("USER", "ADMIN");*/
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+
     }
 
 

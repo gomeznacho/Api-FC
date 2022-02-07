@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MyUserDetails implements UserDetails {
     private String username;
+    private String password;
 
 
     @Override
@@ -24,7 +25,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "pass";
+        return password;
     }
 
     @Override

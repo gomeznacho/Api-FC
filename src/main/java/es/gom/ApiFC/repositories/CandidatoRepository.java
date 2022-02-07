@@ -43,4 +43,6 @@ public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
     List<Candidato> findByPaisIgnoreCaseAndCiudadIgnoreCaseAndPresencialidad(String pais, String ciudad, Presencialidad presencialidad);
 
     List<Candidato> findByPaisIgnoreCaseAndCiudadIgnoreCaseAndPresencialidadAndEtiquetasIdAndMovilidad(String pais, String ciudad, Presencialidad presencialidad, Long etiquetasId, Boolean movilidad);
+
+    List<Candidato> findAllByEtiquetasId(Long id);
 }

@@ -1,6 +1,6 @@
 package es.gom.ApiFC;
 
-import es.gom.ApiFC.config.PasswordConfig;
+import es.gom.ApiFC.config.WebSecurityConfig;
 import es.gom.ApiFC.entities.Candidato;
 import es.gom.ApiFC.entities.Etiqueta;
 import es.gom.ApiFC.entities.Presencialidad;
@@ -8,12 +8,10 @@ import es.gom.ApiFC.entities.Usuario;
 import es.gom.ApiFC.repositories.CandidatoRepository;
 import es.gom.ApiFC.repositories.EtiquetaRepository;
 import es.gom.ApiFC.repositories.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -29,8 +27,7 @@ public class ApiFcApplication {
 		UsuarioRepository usuarioRepository = context.getBean(UsuarioRepository.class);
 		EtiquetaRepository etiquetaRepository = context.getBean(EtiquetaRepository.class);
 
-
-		BCryptPasswordEncoder passwordEncoder = PasswordConfig.passwordEncoder();
+		BCryptPasswordEncoder passwordEncoder = WebSecurityConfig.passwordEncoder();
 
 		//Instancias
 		Usuario usuario1 = new Usuario(null, "ejemplo@ejemplo.com", "usuario1", passwordEncoder.encode("1234"));
