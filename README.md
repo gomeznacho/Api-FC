@@ -1,4 +1,4 @@
-#Proyecto Backend del first commit
+#Proyecto Backend de Open Bootcamp
 
 API rest con los modelos: Candidato, Usuario, Etiquetas y Presencialidad, centrada en el primero.
 
